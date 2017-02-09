@@ -1,14 +1,18 @@
 package com.thoughtbot.tropos.ui
 
+import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.app.ActivityOptionsCompat
+import android.support.v4.util.Pair
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.Window
 import com.thoughtbot.tropos.R
 import com.thoughtbot.tropos.adapters.WeatherAdapter
 import com.thoughtbot.tropos.commons.BaseActivity
@@ -21,10 +25,7 @@ import com.thoughtbot.tropos.refresh.RefreshDrawable
 import com.thoughtbot.tropos.scrolling.WeatherSnapHelper
 import com.thoughtbot.tropos.scrolling.setVerticalEndOverScroller
 import com.thoughtbot.tropos.settings.SettingsActivity
-import kotlinx.android.synthetic.main.activity_main.error_text
-import kotlinx.android.synthetic.main.activity_main.footer
-import kotlinx.android.synthetic.main.activity_main.toolbar_city
-import kotlinx.android.synthetic.main.activity_main.toolbar_last_update
+import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.find
 
 class MainActivity : BaseActivity(), MainView {
@@ -85,7 +86,22 @@ class MainActivity : BaseActivity(), MainView {
   override fun onOptionsItemSelected(item: MenuItem?): Boolean {
     return when (item?.itemId) {
       R.id.action_settings -> {
-        startActivity(Intent(this, SettingsActivity::class.java))
+
+//        val toolbar = toolbar
+//        val actionBarSize = theme.obtainStyledAttributes(
+//            intArrayOf(android.R.attr.actionBarSize)).getDimension(0, 0F)
+//        val x = (toolbar.right - (actionBarSize)).toInt()
+//        val options = ActivityOptionsCompat.makeClipRevealAnimation(toolbar, x, 0, 0, 0)
+//
+//        val navBar = window.findViewById(android.R.id.navigationBarBackground)
+//        val statusBar = window.findViewById(android.R.id.statusBarBackground)
+//
+//        val transitionActivityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(this,
+//            Pair(navBar, Window.NAVIGATION_BAR_BACKGROUND_TRANSITION_NAME),
+//            Pair(statusBar, Window.STATUS_BAR_BACKGROUND_TRANSITION_NAME))
+//
+        val bundle = ActivityOptions.makeSceneTransitionAnimation(this).toBundle()
+        startActivity(Intent(this, SettingsActivity::class.java), bundle)
         return true
       }
       else -> super.onOptionsItemSelected(item)

@@ -28,7 +28,9 @@
       android:screenOrientation="portrait"
       android:theme="@style/AppTheme.TransparentStatusBar"
       />
-    <activity android:name=".settings.SettingsActivity" />
+    <activity
+      android:name=".settings.SettingsActivity"
+      android:theme="@style/AppTheme.TransparentStatusBar" />
     <activity android:name=".commons.WebviewActivity" />
 
   </application>
